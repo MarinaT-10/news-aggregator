@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\NewsController;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
@@ -18,7 +18,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function showOneCategory(int $id)
+    public function showOneCategory(int $id): View
     {
         return \view('news.categoryOne', [
             'categories' => $this->getCategory($id),

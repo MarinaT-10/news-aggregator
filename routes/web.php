@@ -1,6 +1,9 @@
 <?php
+
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\IndexController as AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +21,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello/{name}', static function(string $name): string {
-    return "Hello, {$name}";
+//admin router
+Route::group(['prefix' => 'admin'], static function(){
+    Route::get('/', AdminController::class)
+        ->name('admin.index');
 });
 
-Route::get('/info', static function(): string {
-    return "Info";
-});
+
+Route::get('/info', [InfoController::class, 'info'])
+    ->name('news');
 
 Route::group(['prefix' => ''], static function(){
     Route::get('/news', [NewsController::class, 'index'])
