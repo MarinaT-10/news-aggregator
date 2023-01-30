@@ -7,6 +7,9 @@
 
         <div class="col-4 d-flex justify-content-end align-items-center">
             <div class="col-4 ">
+                <a class="text-muted" href="/uploading/create">Заказ</a>
+            </div>
+            <div class="col-4 ">
                 <a class="text-muted" href="/info">О нас</a>
             </div>
             <a class="btn btn-sm btn-outline-secondary" href="#">Вход на сайт</a>

@@ -2,22 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class FeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return View
      */
-    public function index():View
+    public function index(): View
     {
-        return \view('admin.news.index');
+        return \view('feedback.index');
     }
 
     /**
@@ -27,7 +26,7 @@ class NewsController extends Controller
      */
     public function create(): View
     {
-        return \view('admin.news.create');
+        return \view('feedback.create');
     }
 
     /**
@@ -38,13 +37,13 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'description' => 'required',
-        ]);
-        return response()->json($request->only(['title', 'author', 'desription']));
+        //Записываем данные в файл
+        $filename = "feedback.txt";
+        $data = response()->json($request->all());
+        $file = \file_put_contents(
+            $filename, $data, FILE_APPEND
+        );
+        return response()->json($request->only(['author', 'comment']));
     }
 
     /**

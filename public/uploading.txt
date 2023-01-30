@@ -1,0 +1,11 @@
+HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 07:10:25 GMT
+
+{"_token":"0KvKElGCIwWQs99cJNGLdLsDX0MUbpRKHpVH0rzt","author":"user 1","email":"email@email","phone":"89997776665","manual":"test 1"}HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 08:53:09 GMT
+
+{"_token":"0KvKElGCIwWQs99cJNGLdLsDX0MUbpRKHpVH0rzt","author":"user 2","email":"emai-2@mail.com","phone":"89698884422","manual":"someinfo"}

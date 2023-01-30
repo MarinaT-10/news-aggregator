@@ -1,0 +1,26 @@
+HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 08:18:38 GMT
+
+{"author":"zachariah.ritchie","comment":"Eveniet recusandae ab saepe iste quia voluptatem in. Harum qui tempore et est repellendus."}HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 08:25:44 GMT
+
+{"author":"xbrekke","comment":"Laudantium nostrum natus velit aliquam. Provident commodi repellendus totam natus voluptatem."}HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 08:35:18 GMT
+
+{"author":"barbara97","comment":"Et suscipit quam tempore eligendi eligendi. Rerum facilis dolore commodi aut iste."}HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 08:36:22 GMT
+
+{"author":"tony30","comment":"Sit nobis amet accusamus quia ullam quas. Sed animi qui excepturi eligendi eos."}HTTP/1.0 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Mon, 30 Jan 2023 08:48:22 GMT
+
+{"author":"ywolff","comment":"Et in cupiditate tempore quis ut molestiae architecto. Qui ut et ut sit dolore."}

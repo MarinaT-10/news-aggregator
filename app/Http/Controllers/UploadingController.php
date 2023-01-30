@@ -1,33 +1,30 @@
 <?php
 
-declare(strict_types=1);
+namespace App\Http\Controllers;
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class UploadingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function index():View
+    public function index(): View
     {
-        return \view('admin.news.index');
+        return \view('uploading.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
-        return \view('admin.news.create');
+        return \view('uploading.create');
     }
 
     /**
@@ -38,13 +35,21 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-            'title' => 'required',
             'author' => 'required',
-            'description' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'manual' => 'required',
         ]);
-        return response()->json($request->only(['title', 'author', 'desription']));
+
+        //Записываем данные в файл
+        $filename = "uploading.txt";
+        $data = response()->json($request->all());
+        $file = \file_put_contents(
+            $filename, $data, FILE_APPEND
+        );
+        return response()->json($request->only(['author', 'comment']));
+
     }
 
     /**
