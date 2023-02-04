@@ -50,10 +50,10 @@ Route::group(['prefix' => ''], static function(){
 });
 
 Route::group(['prefix' => ''], static function(){
-    Route::get('/categories', [CategoryController::class, 'showAllCategory'])
-        ->name('categories');
+//    Route::get('/categories', [CategoryController::class, 'index'])
+//        ->name('categories');
 
-    Route::get('/categories/{id}/show', [CategoryController::class, 'showOneCategory'])
+    Route::get('/categories/{id}/show', [CategoryController::class, 'show'])
         ->where ('id', '\d+')
         ->name('categories.show');
 });

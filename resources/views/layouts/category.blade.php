@@ -18,8 +18,8 @@
 
 <div class="container">
     <x-header></x-header>
-    <x-menu></x-menu>
-
+{{--    <x-menu></x-menu>--}}
+@yield('menu')
 @yield('category_title')
 </div>
 

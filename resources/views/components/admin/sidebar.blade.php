@@ -8,13 +8,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('admin.categories.*'))active @endif" href="#">
+                <a class="nav-link @if(request()->routeIs('admin.categories.*'))active @endif" href="/admin/categories">
                     <span data-feather="file"></span>
                     Категории
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('admin.news.*'))active @endif" href="#">
+                <a class="nav-link @if(request()->routeIs('admin.news.*'))active @endif" href="/admin/news">
                     <span data-feather="book"></span>
                     Новости
                 </a>

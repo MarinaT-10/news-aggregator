@@ -7,11 +7,10 @@
         </h3>
 
         <div class="blog-post">
-            <h2 class="blog-post-title">{{ $news['title'] }}</h2>
-            <p class="blog-post-meta">{{$news['created_at']}} by <a href="#">{{$news['author']}}</a></p>
-            {!! $news['description'] !!}
+            <h2 class="blog-post-title">{{ $newsOne->title }}</h2>
+            <p class="blog-post-meta">{{ $newsOne->created_at }} by <a href="#">{{ $newsOne->author }}</a></p>
+            {{ $newsOne->description }}
         </div>
-
     </div><!-- /.blog-main -->
 
     <aside class="col-md-4 blog-sidebar">
@@ -19,15 +18,13 @@
             <h4 class="font-italic">About</h4>
             <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
         </div>
-
-
     </aside><!-- /.blog-sidebar -->
 
 </div><!-- /.row -->
 @endsection
 @push('js')
     <script>
-        $('.change').text('Changed text');
+        $('.change').text({{'Changed text'}});
     </script>
 @endpush
 
