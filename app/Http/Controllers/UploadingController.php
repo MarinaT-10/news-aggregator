@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Models\Uploading;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class UploadingController extends Controller
@@ -33,23 +37,37 @@ class UploadingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
+//        $request->validate([
+//            'author' => 'required',
+//            'email' => 'required',
+//            'phone' => 'required',
+//            'manual' => 'required',
+//        ]);
+//
+//        //Записываем данные в файл
+//        $filename = "uploading.txt";
+//        $data = response()->json($request->all());
+//        $file = \file_put_contents(
+//            $filename, $data, FILE_APPEND
+//        );
+//        return response()->json($request->only(['author', 'comment']));
+
         $request->validate([
             'author' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'manual' => 'required',
+            'message' => 'required',
         ]);
 
-        //Записываем данные в файл
-        $filename = "uploading.txt";
-        $data = response()->json($request->all());
-        $file = \file_put_contents(
-            $filename, $data, FILE_APPEND
-        );
-        return response()->json($request->only(['author', 'comment']));
+        $uploading = new Uploading($request->except('_token'));
 
+        if($uploading->save()) {
+            return redirect()->route('news')->with('success', 'Заявка успешно добавлена');
+        }
+
+        return \back()->with('error', 'Не удалось оформить заявку');
     }
 
     /**

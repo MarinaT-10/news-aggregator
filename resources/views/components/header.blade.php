@@ -2,15 +2,15 @@
     <div class="row flex-nowrap justify-content-between align-items-center">
 
         <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="/news">Новостной портал</a>
+            <a class="blog-header-logo text-dark" href="{{ route('news') }}">Новостной портал</a>
         </div>
 
         <div class="col-4 d-flex justify-content-end align-items-center">
             <div class="col-4 ">
-                <a class="text-muted" href="/uploading/create">Заказ</a>
+                <a class="text-muted" href="{{ route('uploading.create') }}">Заказ</a>
             </div>
             <div class="col-4 ">
-                <a class="text-muted" href="/info">О нас</a>
+                <a class="text-muted" href="{{ route('info') }}">О нас</a>
             </div>
             <a class="btn btn-sm btn-outline-secondary" href="#">Вход на сайт</a>
         </div>

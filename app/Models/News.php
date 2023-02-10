@@ -5,22 +5,37 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class News extends Model
 {
     use HasFactory;
     protected $table = 'news';
 
-    public function getNews(): Collection
+    protected $fillable = [
+        'title',
+        'author',
+        'status',
+        'image',
+        'description'
+    ];
+
+
+    public function categories(): BelongsToMany
     {
-     return DB::table($this->table)->select(['id', 'title', 'author', 'status', 'description', 'created_at'])->get();
+        return $this->belongsToMany(
+            Category:: class,
+            'category_has_news',
+            'news_id',
+            'category_id',
+            'id',
+            'id'
+        );
     }
 
-    public function getNewsById($id): mixed
-    {
-        return DB::table($this->table)->find($id, ['id', 'title', 'author', 'status', 'description', 'created_at']);
-    }
+//    protected $guarded = [
+//        'id',
+//    ];
 
 }

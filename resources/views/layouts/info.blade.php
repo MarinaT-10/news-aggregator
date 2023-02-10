@@ -26,6 +26,7 @@
             Без воды. Всё только по существу.</p>
             <p class="lead my-3">Ценим наших читателей и их время!</p>
         </div>
+
     </div>
 </div>
 
@@ -64,8 +65,10 @@
                    <div>
 
         </div><!-- /.blog-main -->
+                   <h3 class="blog-post-title">Отзывы наших читателей</h3>
+                   <br>
 
-
+                   <a class="btn btn-sm btn-outline-secondary" href="{{ route('feedback.index') }}">Ваши отзывы о работе сайта</a>
     </div><!-- /.row -->
 
 </main><!-- /.container -->

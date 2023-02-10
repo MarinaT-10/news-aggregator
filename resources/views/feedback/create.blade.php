@@ -15,8 +15,12 @@
             <input class="form-control" id="author" name="author"></input>
         </div>
         <div class="form-group">
-            <label for="comment">Комментарий/ отзыв по работе нашего сайта</label>
-            <textarea type="text" id="comment" name="comment" class="form-control"></textarea>
+            <label for="email">Ваш email</label>
+            <input class="form-control" id="email" name="email"></input>
+        </div>
+        <div class="form-group">
+            <label for="message">Комментарий/ отзыв по работе нашего сайта</label>
+            <textarea type="text" id="message" name="message" class="form-control"></textarea>
         </div>
         <br>
         <button type="submit" class="btn-success">Отправить</button>

@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\News;
+use App\QueryBuilders\CategoriesQueryBuilder;
+use App\QueryBuilders\NewsQueryBuilder;
 use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
@@ -15,27 +17,19 @@ class CategoryController extends Controller
 
     }
 
-    public function show(int $id): View
-    {
-
-        $model = new Category();
-        $categoryOne = $model->getCategoryById($id);
-        $categoriesList = $model->getCategories();
-
-
-        $categoryNews = \DB::table('news')
-            ->join('category_has_news as chn', 'news.id', '=', 'chn.news_id')
-            ->leftjoin('categories', 'chn.category_id', '=', 'categories.id')
-            ->select("news.*", 'chn.category_id', 'categories.id','categories.title as ctitle')
-            ->where('categories.id', '=', $categoryOne->id)
-            ->get();
-
+    public function show(
+        CategoriesQueryBuilder $categoriesQueryBuilder,
+        int $id
+    ): View {
+        $categoriesList = $categoriesQueryBuilder->getAll();
+        $categoryOne = $categoriesQueryBuilder->getCategoryById($id);
+        $categoryNews = $categoryOne->paginate(2);
 
         return \view('categories.show', [
             'categoryOne' => $categoryOne,
             'categoriesList' => $categoriesList,
-            'categoryNews' => $categoryNews
-        ],
-           );
+            'categoryNews' => $categoryNews,
+        ]);
     }
+
 }

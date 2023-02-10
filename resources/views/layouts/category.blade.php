@@ -18,7 +18,7 @@
 
 <div class="container">
     <x-header></x-header>
-{{--    <x-menu></x-menu>--}}
+
 @yield('menu')
 @yield('category_title')
 </div>
@@ -26,7 +26,8 @@
 <main role="main" class="container">
     <div class="row">
         @yield('content')
-<x-sidebar></x-sidebar>
+        @yield('sidebar')
+{{--<x-sidebar></x-sidebar>--}}
     </div><!-- /.row -->
 
 </main><!-- /.container -->

@@ -28,8 +28,8 @@
                 <input class="form-control" id="phone" name="phone" value="{{ old('phone') }}"></input>
             </div>
             <div class="form-group">
-                <label for="manual">Опишите, что Вы хотите получить</label>
-                <textarea type="text" id="manual" name="manual" class="form-control">{{ old('manual') }}</textarea>
+                <label for="message">Опишите, что Вы хотите получить</label>
+                <textarea type="text" id="message" name="message" class="form-control">{{ old('message') }}</textarea>
             </div>
             <br>
             <button type="submit" class="btn-success">Отправить</button>

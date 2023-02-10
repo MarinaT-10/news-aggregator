@@ -27,9 +27,12 @@ Route::get('/', function () {
 
 //admin routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function(){
+
     Route::get('/', AdminController::class)
         ->name('index');
+
     Route::resource('categories', AdminCategoryController::class);
+
     Route::resource('news', AdminNewsController::class);
 });
 
@@ -38,7 +41,7 @@ Route::resource('feedback', FeedbackController::class);
 Route::resource('uploading', UploadingController::class);
 
 Route::get('/info', [InfoController::class, 'info'])
-    ->name('news');
+    ->name('info');
 
 Route::group(['prefix' => ''], static function(){
     Route::get('/news', [NewsController::class, 'index'])
@@ -56,6 +59,13 @@ Route::group(['prefix' => ''], static function(){
     Route::get('/categories/{id}/show', [CategoryController::class, 'show'])
         ->where ('id', '\d+')
         ->name('categories.show');
+});
+
+Route::get('collection', function()
+{
+    $names = ['Ann', 'Billy', 'John', 'Andy', 'Feeby', 'Edd', 'Jill', 'Jeck', 'Freddy'];
+    $collect = \collect($names);
+    dd($collect->map(fn($item) => strtoupper($item))->keys());
 });
 
 
