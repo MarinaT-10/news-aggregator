@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Enums\FeedbackStatus;
+use App\Http\Requests\Feedback\CreateRequest;
+use App\Http\Requests\Feedback\EditRequest;
 use App\Models\Feedback;
 use App\QueryBuilders\FeedbackQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param FeedbackQueryBuilder $feedbackQueryBuilder
      * @return View
      */
     public function index(FeedbackQueryBuilder $feedbackQueryBuilder): View
@@ -42,32 +45,22 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param CreateRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CreateRequest $request): RedirectResponse
     {
-//        //Записываем данные в файл
-//        $filename = "feedback.txt";
-//        $data = response()->json($request->all());
-//        $file = \file_put_contents(
-//            $filename, $data, FILE_APPEND
-//        );
-//        return response()->json($request->only(['author', 'comment']));
-
-        $feedback = new Feedback($request->except('_token'));
+        $feedback = new Feedback($request->validated());
 
         if($feedback->save()){
-            return redirect()->route('feedback.index')->with('success', 'Отзыв успешно добавлен');
+            return redirect()
+                ->route('feedback.index')
+                ->with('success', __('messages.feedback.success'));
         }
 
-        $request->validate([
-            'author' => 'required',
-            'message' => 'required',
-            'email' => 'required',
-        ]);
+        return \back()
+            ->with('error', __('messages.feedback.fail'));
 
-        return \back()->with('error', 'Не удалось отправить отзыв');
     }
 
     /**
@@ -85,7 +78,6 @@ class FeedbackController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Feedback $feedback
-     * @param FeedbackStatus $feedbackStatus
      * @return View
      */
     public function edit(Feedback $feedback): View
@@ -99,28 +91,41 @@ class FeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param EditRequest $request
      * @param Feedback $feedback
      * @return RedirectResponse
      */
-    public function update(Request $request, Feedback $feedback): RedirectResponse
+    public function update(EditRequest $request, Feedback $feedback): RedirectResponse
     {
-        $feedback = $feedback->fill($request->except('_token'));
+        $feedback = $feedback->fill($request->validated());
+
         if($feedback->save()){
-            return \redirect()->route('feedback.index')->with('success', 'Отзыв успешно обновлен');
+            return \redirect()
+                ->route('feedback.index')
+                ->with('success', __('messages.feedback.updateSuccess'));
         }
-        return \back()->with('error', 'Не удалось сохранить отзыв');
+        return \back()
+            ->with('error', __('messages.feedback.fail'));
+
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Feedback $feedback
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Feedback $feedback): JsonResponse
     {
-        //
+        try{
+            $feedback->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+
+            return \response()->json('error', 400);
+        }
     }
 }

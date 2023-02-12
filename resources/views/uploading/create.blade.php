@@ -17,19 +17,19 @@
             @csrf
             <div class="form-group">
                 <label for="author">Ваше имя</label>
-                <input value="{{ old('author') }}" id="author" name="author" class="form-control"></input>
+                <input value="{{ old('author') }}" id="author" name="author" class="form-control @error('author') is-invalid @enderror"></input>
             </div>
             <div class="form-group">
                 <label for="email">Ваш email</label>
-                <input class="form-control" id="email" name="email" value="{{ old('email') }}"></input>
+                <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}"></input>
             </div>
             <div class="form-group">
                 <label for="phone">Ваш номер телефона</label>
-                <input class="form-control" id="phone" name="phone" value="{{ old('phone') }}"></input>
+                <input class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}"></input>
             </div>
             <div class="form-group">
-                <label for="message">Опишите, что Вы хотите получить</label>
-                <textarea type="text" id="message" name="message" class="form-control">{{ old('message') }}</textarea>
+                <label for="message">Опишите, что Вы хотите получить (заявка)</label>
+                <textarea type="text" id="message" name="message" class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
             </div>
             <br>
             <button type="submit" class="btn-success">Отправить</button>

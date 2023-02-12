@@ -17,7 +17,8 @@
                         <p class="card-text mb-auto" >{{ $feedback->message }}</p>
                         <br>
                         <div class="mb-1 text-muted ">Статус: сообщение {{ $feedback->status }}</div>
-                        <div><a href="{{ route('feedback.edit', ['feedback' =>$feedback]) }}">Изменить</a>&nbspl<a href="" style="color: red;"> Удалить.</a></div>
+                        <div><a href="{{ route('feedback.edit', ['feedback' =>$feedback]) }}">Изменить</a>&nbspl
+                            <a href="javascript:;" class="delete" rel="{{ $feedback->id }}" style="color: red;"> Удалить.</a></div>
                     </div>
                 </div>
             </div><!-- /.blog-post -->
@@ -25,3 +26,35 @@
             {{ $feedbacks->links() }}
     </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            let elements = document.querySelectorAll(".delete");
+            elements.forEach(function(e, k) {
+                e.addEventListener("click", function() {
+                    const id = this.getAttribute('rel');
+                    if(confirm(`Подтверждаете удаление записи с #ID = ${id}`)) {
+                        send(`/feedback/${id}`).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        alert("Удаление отменено");
+                    }
+                });
+            });
+        });
+
+        async function send(url) {
+            let response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+
+            let result = await response.json();
+            return result.ok;
+        }
+    </script>
+@endpush

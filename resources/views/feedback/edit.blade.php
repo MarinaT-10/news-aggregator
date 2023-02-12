@@ -6,6 +6,12 @@
 @endsection
 @section('content')
     <div>
+        @if ($errors->any())
+            @foreach($errors->all() as $error)
+                <x-alert type="danger" :message="$error"></x-alert>
+            @endforeach
+        @endif
+
         <form method="post" action="{{ route('feedback.update', ['feedback' => $feedback]) }}">
             @csrf
             @method('put')

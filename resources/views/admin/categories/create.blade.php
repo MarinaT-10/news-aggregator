@@ -5,16 +5,22 @@
         <div class="btn-toolbar mb-2 mb-md-0"></div>
     </div>
     <div>
+        @if ($errors->any())
+            @foreach($errors->all() as $error)
+                <x-alert type="danger" :message="$error"></x-alert>
+            @endforeach
+        @endif
+
         <form method="post" action="{{ route('admin.categories.store') }}">
             @csrf
             <div class="form-group">
                 <label for="title">Название категории</label>
-                <input type="text" id="title" name="title" value="{{ old('title') }}" class="form-control" >
+                <input type="text" id="title" name="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" >
             </div>
 
             <div class="form-group">
                 <label for="description">Описание</label>
-                <textarea type="text" id="description" name="description" class="form-control">{{ old('description') }}</textarea>
+                <textarea type="text" id="description" name="description" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
             </div>
             <br>
             <button type="submit" class="btn-success">Сохранить</button>

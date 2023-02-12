@@ -5,6 +5,11 @@
         <div class="btn-toolbar mb-2 mb-md-0"></div>
     </div>
     <div>
+        @if ($errors->any())
+            @foreach($errors->all() as $error)
+                <x-alert type="danger" :message="$error"></x-alert>
+            @endforeach
+        @endif
         <form method="post" action="{{ route('admin.categories.update', ['category' => $category]) }}">
             @csrf
             @method('put')
