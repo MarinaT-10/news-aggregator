@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('admin.users'))active @endif" href="#">
+                <a class="nav-link @if(request()->routeIs('admin.users.*'))active @endif" href="/admin/users">
                     <span data-feather="users"></span>
                     Пользователи
                 </a>

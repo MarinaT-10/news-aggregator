@@ -10,9 +10,16 @@
                 <a class="text-muted" href="{{ route('uploading.create') }}">Заказ</a>
             </div>
             <div class="col-4 ">
-                <a class="text-muted" href="{{ route('info') }}">О нас</a>
+                <a class="text-muted " href="{{ route('info') }}">О нас</a>
             </div>
-            <a class="btn btn-sm btn-outline-secondary" href="#">Вход на сайт</a>
-        </div>
+            @if (Auth::user())
+                <a class="btn btn-sm btn-outline-secondary" href="{{ route('account.logout') }}">Выйти</a>
+            @else
+                <div class="col-4"><a class="btn btn-sm btn-outline-secondary" href="{{ route('login') }}">Вход</a></div>
+                <div><a class="btn btn-sm btn-outline-secondary" href="{{ route('register') }}">Регистрация</a></div>
+            @endif
+
+    </div>
+
     </div>
 </header>

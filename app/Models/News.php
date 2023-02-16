@@ -22,15 +22,6 @@ class News extends Model
         'description'
     ];
 
-//    protected function author(): Attribute
-//    {
-//        return Attribute::make(
-//            get: fn($value): string => strtoupper($value),
-//            set: fn($value): string => strtolower($value)
-//        );
-//    }
-
-
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(
