@@ -22,10 +22,6 @@
 
 </div><!-- /.row -->
 @endsection
-@push('js')
-    <script>
-        $('.change').text({{'Changed text'}});
-    </script>
-@endpush
+
 
 

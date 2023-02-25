@@ -1,4 +1,5 @@
 @extends('layouts.feedback')
+@section('title') Создать отзыв @parent @stop
 @section('info_title')
     <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
@@ -7,6 +8,7 @@
     </div>
 @endsection
 @section('content')
+    <script src="https://cdn.ckeditor.com/4.20.2/basic/ckeditor.js"></script>
 <div>
     @if ($errors->any())
         @foreach($errors->all() as $error)
@@ -27,6 +29,9 @@
         <div class="form-group">
             <label for="message">Комментарий/ отзыв по работе нашего сайта</label>
             <textarea type="text" id="message" name="message" class="form-control @error('message') is-invalid @enderror"></textarea>
+            <script>
+                CKEDITOR.replace( 'message' );
+            </script>
         </div>
         <br>
         <button type="submit" class="btn-success">Отправить</button>

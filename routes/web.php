@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\SourceController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UploadingController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,9 @@ Route::group(['middleware' => 'auth'], static function () {
     Route::get('/account',AccountController::class)
         ->name('account');
 
+    Route::resource('feedback', FeedbackController::class)->only([
+        'index', 'show', 'create', 'store']);
+
     //admin routes
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'is_admin'], static function(){
 
@@ -52,10 +56,16 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::resource('news', AdminNewsController::class);
 
         Route::resource('users', AdminUserController::class);
+
+        Route::resource('sources', SourceController::class);
+
+        Route::resource('feedback', FeedbackController::class)->only([
+            'edit', 'update','destroy'
+        ]);
     });
 });
 
-Route::resource('feedback', FeedbackController::class);
+
 
 Route::resource('uploading', UploadingController::class);
 
@@ -102,4 +112,10 @@ Route::group(['middleware' => 'guest'], function() {
 
     Route::get('/auth/callback/{driver}', [SocialProvidersController::class, 'callback'])
         ->where('driver', '\w+');
+});
+
+
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Http\Requests\News;
 
 use App\Enums\NewsStatus;
@@ -32,7 +33,7 @@ class EditRequest extends FormRequest
             'title' => ['required', 'string', 'min:5', 'max:200'],
             'author' => ['nullable', 'string', 'min:2', 'max:30'],
             'status' => ['required', new Enum(NewsStatus::class)],
-            'image' => ['sometimes'],
+            'image'  => ['nullable', 'image', 'mimes:jpeg,jpg,png,gif'],
             'description' => ['nullable', 'string'],
         ];
     }

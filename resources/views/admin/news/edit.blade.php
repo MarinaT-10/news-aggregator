@@ -1,5 +1,7 @@
 @extends('layouts.admin')
+@section('title') Админпанель - изменить новость @parent @stop
 @section('content')
+    <script src="https://cdn.ckeditor.com/4.20.2/basic/ckeditor.js"></script>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">Редактировать новость</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -12,7 +14,7 @@
                 <x-alert type="danger" :message="$error"></x-alert>
             @endforeach
         @endif
-        <form method="post" action="{{ route('admin.news.update',['news' => $news]) }}">
+        <form method="post" action="{{ route('admin.news.update',['news' => $news]) }}" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="form-group">
@@ -47,6 +49,16 @@
             <div class="form-group">
                 <label for="description">Описание</label>
                 <textarea type="text" id="description" name="description" class="form-control">{!! $news->description !!} </textarea>
+                <script>
+                    ClassicEditor
+                        .create( document.querySelector( '#description' ) )
+                        .catch( error => {
+                            console.error( error );
+                        } );
+                </script>
+                <script>
+                    CKEDITOR.replace( 'description' );
+                </script>
             </div>
             <br>
             <button type="submit" class="btn-success">Сохранить</button>

@@ -25,7 +25,7 @@ final class NewsQueryBuilder extends QueryBuilder
 
     public function getNewsWithPagination(int $quantity = 10): LengthAwarePaginator
     {
-        return $this->model->with('categories')->paginate($quantity);
+        return $this->model->with('categories')->orderBy('created_at', 'DESC')->paginate($quantity);
     }
 
     public function getAll(): Collection
@@ -38,5 +38,9 @@ final class NewsQueryBuilder extends QueryBuilder
         return $this->model->find($id, ['id', 'title', 'author', 'status', 'description', 'created_at']);
     }
 
+    public function update(News $news, array $data): bool
+    {
+        return $news->fill($data)->save();
+    }
 
 }

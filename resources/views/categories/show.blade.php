@@ -1,4 +1,7 @@
 @extends('layouts.category')
+@section('title')
+    {{ $categoryOne->title }}
+    @parent @stop
 @section('menu')
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
@@ -27,7 +30,7 @@
                             <a class="text-dark" href="{{ route('news.show', ['id'=>$news->id]) }}">{{ $news->title }}</a>
                         </h3>
                         <div class="mb-1 text-muted">{{ $news->created_at }}</div>
-                        <p class="card-text mb-auto">{{ $news->description }}</p>
+                        <p class="card-text mb-auto">{!! $news->description !!}</p>
                         <strong class="d-inline-block mb-2 ">Автор: {{ $news->author }}</strong>
                         <a href="{{ route('news.show', ['id'=>$news->id]) }}">Читать далее</a>
                     </div>

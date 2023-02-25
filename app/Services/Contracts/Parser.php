@@ -16,4 +16,16 @@ interface Parser
      * @return array
      */
     public function getParseData(): array;
+
+    /**
+     * @param string $link
+     * @return void
+     */
+    public function saveParseData(string $link): void;
+
+    /**
+     * @param string $link
+     * @return void
+     */
+    public function saveParseDataInFile(string $link): void;
 }
